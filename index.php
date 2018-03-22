@@ -82,39 +82,14 @@
                 gen = "Female";
             }
 
-//            var params = (new URL(document.location)).searchParams;
-//            var name = params.get("Id");
-
-//            if(<?php //empty($_GET)?>//){
-//                var id=<?php //echo $_GET['Id']; ?>//;
-//                console.log()
-//                $.ajax({
-//                    type: "post",
-//                    url: "./api/api.php",
-//                    data: {'id':id,'fname': fname, 'lname': lname, 'gen': gen},
-//                    success: function (data) {
-//                        console.log(data);
-//                    }
-//                });
-//            }else {
                 $.ajax({
                     type: "POST",
                     url: "./api/api.php",
-                    data: {'id':<?php echo $_GET; ?>,'fname': fname, 'lname': lname, 'gen': gen},
+                    data: {'id':<?php echo $_GET['Id']; ?>,'fname': fname, 'lname': lname, 'gen': gen},
                     success: function (data) {
                         console.log(data);
                     }
                 });
-            //}
-//            $.post('./api/api.php',{
-//                'fname':fname,
-//                'lname':lname,
-//                'gen':gen
-//            },
-//                function (data,status) {
-//                    alert("Data is"+data+"\n status is "+status);
-//                });
-
         });
     });
 </script>
