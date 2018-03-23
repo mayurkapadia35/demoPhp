@@ -1,7 +1,7 @@
 <?php
-    require 'connection.php';
-    $sql="select * from tblregistration";
-    $res=mysqli_query($conn,$sql);
+require 'connection.php';
+$sql = "select * from tblregistration";
+$res = mysqli_query($conn, $sql);
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,32 +18,45 @@
 
 </head>
 <body class="container">
-    <table align="center" class="table table-hover">
-        <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
-            <th colspan="2">Actions</th>
-        </tr>
+<a href="index.php">Form</a>
+<table align="center" class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th colspan="2">Actions</th>
+    </tr>
 
-        <?php
-            if(mysqli_num_rows($res)>0){
-                while($row=mysqli_fetch_array($res)){
-                    ?>
-                    <tr>
-                        <td><?php echo $row['id'];?></td>
-                        <td><?php echo $row['firstname'];?></td>
-                        <td><?php echo $row['lastname'];?></td>
-                        <td><?php echo $row['gender'];?></td>
-                        <td><a href="index.php?Id=<?php echo $row['id']; ?>" >Edit</a></td>
-                        <td><a href="javascript:void(0)">Delete</a></td>
-                    </tr>
-        <?php
-                }
-            }
-
-        ?>
-    </table>
+    <?php
+    if (mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_array($res)) {
+            ?>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['firstname']; ?></td>
+                <td><?php echo $row['lastname']; ?></td>
+                <td><?php echo $row['gender']; ?></td>
+                <td><a href="index.php?Id=<?php echo $row['id']; ?>">Edit</a></td>
+                <td><a href="javascript:void(0)" onclick="deleteData(<?php echo $row['id']; ?>) ">Delete</a></td>
+            </tr>
+            <?php
+        }
+    }
+    ?>
+</table>
 </body>
 </html>
+<script>
+    function deleteData(Id) {
+        $.ajax({
+            type: "post",
+            url: "./api/api.php",
+            data: {'deleteid': Id},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+
